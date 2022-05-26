@@ -26,13 +26,13 @@ from kivy.base import runTouchApp
 import kivy
 from kivy.app import App
 from kivy.uix.button import Button
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.config import Config
+from kivy.uix.widget import Widget
 
 Config.set('graphics', 'resizable', True)
-
-
 
 
 
@@ -55,10 +55,6 @@ def txt_to_image(card):
         image = f'{rank}_of_{suits[suit]}'
     return image
 
-
-
-
-
 deck = list(Card)
 random.shuffle(deck)
 
@@ -71,42 +67,66 @@ turn = deck.pop()
 river = deck.pop()
 
 
-print(txt_to_image(p1Hand[0]))
 
 
 
 
+
+class RootWidget(BoxLayout):
+    def btn_clk(self):
+        self.lbl.text = "You have been pressed"
+
+#class pokerPer(GridLayout):
+
+
+
+class CLayout(Widget):
+    def press(self, instance):
+        name = self.name.text
+
+        self.name.text = ""
 
 class TxPoker(App):
-
     def build(self):
+        return CLayout()
 
-        Rl = FloatLayout()
+#if __name__  == '__main__':
+#    txPoker().run()
+myApp = TxPoker()
+myApp.run()
 
-        p1card1 = Button(size_hint=(.15, .3),
-                     background_normal = 'PNG-cards-1.3/back_of_card.jpg',
-                     pos_hint = {'center_x':.3, 'center_y':.2},
-                     background_down = 'PNG-cards-1.3/' + txt_to_image(p1Hand[0]) + '.png',
-                     text='Hello world')
+# class TxPoker(App):
+#
+#     def build(self):
+        #
+        # Rl = FloatLayout()
+        #
+        # p1card1 = Button(size_hint=(.15, .3),
+        #              background_normal = 'PNG-cards-1.3/back_of_card.jpg',
+        #              pos_hint = {'center_x':.3, 'center_y':.2},
+        #              background_down = 'PNG-cards-1.3/' + txt_to_image(p1Hand[0]) + '.png',
+        #              text='Hello world')
+        #
+        # print(p1card1)
+        #
+        #
+        # p1card2 = Button(size_hint=(.15, .3),
+        #                  background_normal='PNG-cards-1.3/back_of_card.jpg',
+        #                  pos_hint={'center_x': .7, 'center_y': .2},
+        #                  background_down='PNG-cards-1.3/' + txt_to_image(p1Hand[1]) + '.png',
+        #                  text='Hello world')
+        #
+        #
+        #
+        # # adding widget i.e button
+        # Rl.add_widget(p1card1)
+        # Rl.add_widget(p1card2)
+        # #Rl.add_widget(btn1)
+        #
+        # # return the layout
 
-        print(p1card1)
+        #return RL
 
-
-        p1card2 = Button(size_hint=(.15, .3),
-                         background_normal='PNG-cards-1.3/back_of_card.jpg',
-                         pos_hint={'center_x': .7, 'center_y': .2},
-                         background_down='PNG-cards-1.3/' + txt_to_image(p1Hand[1]) + '.png',
-                         text='Hello world')
-
-
-
-        # adding widget i.e button
-        Rl.add_widget(p1card1)
-        Rl.add_widget(p1card2)
-        #Rl.add_widget(btn1)
-
-        # return the layout
-        return Rl
 
 
 
@@ -114,9 +134,10 @@ class TxPoker(App):
 
 
 # run the app
-if __name__ == "__main__":
-    TxPoker().run()
-
+# if __name__ == "__main__":
+#myApp = TxPoker()
+#TxPoker().run()
+#myApp.run()
 
 
 
