@@ -31,7 +31,7 @@ from kivy.uix.relativelayout import RelativeLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.config import Config
 from kivy.uix.widget import Widget
-
+from kivy.uix.gridlayout import GridLayout
 Config.set('graphics', 'resizable', True)
 
 
@@ -69,10 +69,27 @@ river = deck.pop()
 
 
 
+class pokerGrd(RelativeLayout):
+
+    suits = ["Spades", "Hearts", "Clubs", "Diamond"]
+    Ranks = ["A", 2, 3, 4, 5, 6, 7, 8 ,9, "T", "j", "Q","K"]
+
+
+
+
+
+
+    pass
+
 
 
 
 class RootWidget(BoxLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+
+
     def btn_clk(self):
         self.lbl.text = "You have been pressed"
 
