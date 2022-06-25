@@ -1,5 +1,4 @@
 #import kivy module
-
 import kivy
 
 # base Class of your App inherits from the App class.
@@ -14,14 +13,8 @@ kivy.require('1.9.0')
 # Importing Drop-down from the module to use in the program
 from kivy.uix.dropdown import DropDown
 
-# The Button is a Label with associated actions
-# that are triggered when the button is pressed
-# (or released after a click / touch)
-from kivy.uix.button import Button
-
 # another way used to run kivy app
 from kivy.base import runTouchApp
-
 
 import kivy
 from kivy.app import App
@@ -34,12 +27,8 @@ from kivy.uix.widget import Widget
 from kivy.uix.gridlayout import GridLayout
 Config.set('graphics', 'resizable', True)
 
-
-
 from poker import Card
 import random
-import poker
-
 
 def txt_to_image(card):
     suits = {'♣': 'spades', '♦': 'diamonds', '♥': 'hearts', '♠': 'clubs' }
@@ -57,58 +46,78 @@ def txt_to_image(card):
 
 deck = list(Card)
 random.shuffle(deck)
+savedDeck = deck #Refernce
 
 #Player 1
 p1Hand = [deck.pop() for __ in range(2)]
 
+#Player 2
+p2Hand = [deck.pop() for __ in range(2)]
 
+#Dealing
 flop = [deck.pop() for __ in range(3)]
 turn = deck.pop()
 river = deck.pop()
+#add burn cards
 
 
 
 
-class pokerGrd(RelativeLayout):
-
-    suits = ["Spades", "Hearts", "Clubs", "Diamond"]
-    Ranks = ["A", 2, 3, 4, 5, 6, 7, 8 ,9, "T", "j", "Q","K"]
-
-
-
-
-
-
-    pass
-
-
-
-
-class RootWidget(BoxLayout):
+class pokerGrd(GridLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.cols = 4
+        self.rows = 15
 
+        Suits = ["Spades", "Hearts", "Clubs", "Diamond"]
+        Ranks = ["A", 2, 3, 4, 5, 6, 7, 8, 9, "T", "j", "Q", "K"]
 
+        #determine buttons state: instance is the object, value is the down
+        def callback(instance, value):
+            print('My button <%s> state is <%s>' % (instance, value))
 
-    def btn_clk(self):
-        self.lbl.text = "You have been pressed"
+        for i in Suits:
+            if i in ['Hearts', "Diamond"]:
+                btn = Button(text=str(i), background_color=(1,0,0,1))
+            else:
+                btn = Button(text=str(i), background_color = (0,0,0,1))
 
-#class pokerPer(GridLayout):
+            btn.suit = i  # assign suit
+            #btn.bind(on_release=lambda i=i: self.clicked(i))
+            self.add_widget(btn)
 
+        for i in Ranks:
+            for j in range(4):
+                btn = Button(text=str(i), on_release=self.clicked)
+                btn.rank = i
+                btn.suit = Suits[j]  # assign suit
+                btn.bind(state=callback)
+                #btn.bind(on_release=lambda i=i: self.clicked(i))
+                self.add_widget(btn)
 
+    def clicked(self, botn):
+        print(f"button suit: {botn.suit}, rank:{botn.rank}, currnt value: {botn.text}")  # print text and suit
+        botn.text = "x" #Update action
 
 class CLayout(Widget):
     def press(self, instance):
         name = self.name.text
-
         self.name.text = ""
+
 
 class TxPoker(App):
     def build(self):
         return CLayout()
 
+
+
+
+
+
 #if __name__  == '__main__':
 #    txPoker().run()
+
+
 myApp = TxPoker()
 myApp.run()
 

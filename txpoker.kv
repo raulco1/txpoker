@@ -1,79 +1,24 @@
 <CLayout>
-    FloatLayout:
+    BoxLayout:
         size: root.width, root.height
 
-        BoxLayout:
-            size_hint: 1.5, 1
-            cols:2
+        cols:2
 
+        Button:
+            size_hint: 2, 1
+            background_color:(90/255,200/255,70/255,1)
+            text: "Game Board0"
 
-            Button:
-                background_color:(1,0,1,1)
-                text: "Game Board0"
-            pokerGrd:
+        pokerGrd:
 
 
 
 
 <pokerGrd>
+    size : root.size
     GridLayout:
-        size_hint: 0.35, 1
         cols: 4
-        rows: 5
-
-        Label:
-            text: "Spades"
-        Label:
-            text: "Hearts"
-        Label:
-            text: "Diamonds"
-        Label:
-            text: "Clubs"
-
-
-        #a
-        Button:
-            text: 'A'
-        Button:
-            text: 'A'
-        Button:
-            text: 'A'
-        Button:
-            text: 'A'
-
-        #2
-        Button:
-            text: '2'
-        Button:
-            text: '2'
-        Button:
-            text: '2'
-        Button:
-            text: '2'
-
-        #3
-        Button:
-            text: '3'
-        Button:
-            text: '3'
-        Button:
-            text: '3'
-        Button:
-            text: '3'
-
-        #4
-        Button:
-            text: '4'
-        Button:
-            text: '4'
-        Button:
-            text: '4'
-        Button:
-            text: '4'
-
-
-
-
+        rows: 14
 
 
 
