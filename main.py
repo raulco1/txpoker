@@ -38,7 +38,6 @@ Config.set('graphics', 'resizable', True)
 
 from poker import Card
 import random
-import poker
 
 
 def txt_to_image(card):
@@ -69,32 +68,50 @@ river = deck.pop()
 
 
 
-class pokerGrd(RelativeLayout):
-
-    suits = ["Spades", "Hearts", "Clubs", "Diamond"]
-    Ranks = ["A", 2, 3, 4, 5, 6, 7, 8 ,9, "T", "j", "Q","K"]
 
 
 
 
+class pokerGrd(GridLayout):
 
-
-    pass
-
-
-
-
-class RootWidget(BoxLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
+        self.cols = 4
+        self.rows = 15
+
+        suits = ["Spades", "Hearts", "Clubs", "Diamond"]
+        Ranks = ["A", 2, 3, 4, 5, 6, 7, 8, 9, "T", "j", "Q", "K"]
+
+        for i in suits:
+            btn = Button(text=str(i), background_color = (0,0,0,1), on_release=self.clicked)
+            btn.test = i  # assign suit
+            # btn.bind(on_release=lambda i=i: self.clicked(i))
+            self.add_widget(btn)
+            print(i, btn)
 
 
+        for i in Ranks:
+            for j in range(4):
+                btn = Button(text=str(i), on_release=self.clicked)
+                btn.test = suits[j]  # assign suit
+                # btn.bind(on_release=lambda i=i: self.clicked(i))
+                self.add_widget(btn)
 
-    def btn_clk(self):
-        self.lbl.text = "You have been pressed"
+    def clicked(self, botn):
+        print(botn.text, botn.test)  # print text and suit
+        botn.text = "x"
+        #print(help(botn))
+        print(botn.__class__.__name__)
+        print(botn.__weakref__)
+        print(botn.__self__)
+        print("hello")
+        print(self)
+        print(botn)
 
-#class pokerPer(GridLayout):
-
+#
+# class RootWidget(BoxLayout):
+#     def __init__(self, **kwargs):
+#         super().__init__(**kwargs)
 
 
 class CLayout(Widget):
@@ -102,6 +119,7 @@ class CLayout(Widget):
         name = self.name.text
 
         self.name.text = ""
+
 
 class TxPoker(App):
     def build(self):
