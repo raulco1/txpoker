@@ -63,6 +63,7 @@ river = deck.pop()
 
 
 
+
 class pokerGrd(GridLayout):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
@@ -99,10 +100,37 @@ class pokerGrd(GridLayout):
         print(f"button suit: {botn.suit}, rank:{botn.rank}, currnt value: {botn.text}")  # print text and suit
         botn.text = "x" #Update action
 
-class CLayout(Widget):
+
+class gameBoard(Button):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+        self.text ="hello"
+
+
+#
+# class CLayout(BoxLayout):
+#     def __init__(self, **kwargs):
+#         super().__init__(**kwargs)
+#
+#
+#
+#
+#         def press(self,instance):
+#             self.name.text = 'hello'
+#
+
+
+class CLayout(BoxLayout):
+    def __init__(self, **kwargs):
+        super().__init__(**kwargs)
+
+
     def press(self, instance):
+        root = App.get_running_app().root
+
+        self.name.text = "hello"
         name = self.name.text
-        self.name.text = ""
+
 
 
 class TxPoker(App):

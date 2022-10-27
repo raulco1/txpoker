@@ -1,13 +1,25 @@
 <CLayout>
     BoxLayout:
-        size: root.width, root.height
 
-        cols:2
 
-        Button:
-            size_hint: 2, 1
-            background_color:(90/255,200/255,70/255,1)
-            text: "Game Board0"
+        GridLayout:
+            canvas.before:
+                Color:
+                    rgba: (42/255,96/255,59/255,1)
+                Rectangle:
+                    pos:self.pos
+                    size:self.size
+            size_hint:2 , 1
+            cols: 4
+            rows: 4
+            FloatLayout:
+
+
+
+
+
+
+
 
         pokerGrd:
 
@@ -17,7 +29,7 @@
 <pokerGrd>
     size : root.size
     GridLayout:
-        cols: 4
+        cols:4
         rows: 14
 
 
